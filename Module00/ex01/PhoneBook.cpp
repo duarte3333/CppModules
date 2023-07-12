@@ -23,12 +23,47 @@ PhoneBook &PhoneBook::operator=(const PhoneBook &other)
 	return *this;
 }
 
+/*Função para remover espaços de uma string.
+  -Iterador desde begin() ate a o end(), que faz um predicativo lambda
+  movendo os whitespaces(que cumprem a condicao) para o final da string.
+  -result.erase(..., result.end()) recebe dois iteradores que marcam o inicio
+  e o final dos elementos a serem removidos*/
+/* std::string DeleteSpaces(const std::string& str)
+{
+    std::string result = str;
+    result.erase(std::remove_if(result.begin(), result.end(), \
+		[](unsigned char c) { return std::isspace(c); }), result.end());
+    return result;
+} */ 
+
+/*Função para remover espaços de uma string.*/
+std::string DeleteSpaces(const std::string& str)
+{
+    std::string result;
+    result.reserve(str.size());
+
+    for (size_t i = 0; i < str.size(); ++i)
+    {
+        if (!std::isspace(str[i]))
+            result += str[i];
+    }
+    return result;
+}
+
+
 // Função para ler um input em C++
 std::string readLine(std::string prompt)
 {
 	std::string line;
 	std::cout << prompt;
 	std::getline(std::cin, line);
+	line = DeleteSpaces(line);
+	while (line.empty())
+	{
+		std::cout << prompt;
+        std::getline(std::cin, line);
+        line = DeleteSpaces(line);
+	}
 	return (line);
 }
 
