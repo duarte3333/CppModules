@@ -23,7 +23,7 @@ public:
 	std::string getNickname();
 	void setIndex(int i);
 	void CreateContact (int id, std::string first, std::string last, std::string nick, std::string number, std::string secret);
-	void DisplaySearched();
+	void DisplayContact(void);
 };
 
 #endif

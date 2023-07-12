@@ -2,11 +2,13 @@
 #define PHONEBOOK_HPP
 #include "Contact.hpp"
 
+std::string readLine(std::string prompt);
+
 class PhoneBook {
     private:
         Contact PhoneList[8];
         void rotateContacts(void);
-		int lastContact(void);
+		void checkDetails(void);
 
     public:
 		//PhoneBook() = default; //Implementacao implicita do compilador
@@ -15,7 +17,6 @@ class PhoneBook {
 		PhoneBook& operator=(const PhoneBook& other); // Copy Assignment Operator
         void AddContact(void);
         void ShowContacts(void);
-        void SearchContact(void);
 };
 
 

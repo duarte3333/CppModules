@@ -9,6 +9,22 @@ Contact::Contact() {
 Contact::~Contact(){
 }
 
+/* Copy Constructor.
+Copia do other para o this, assegurando alocacoes de memoria independentes */
+Contact& Contact::operator=(const Contact& other)
+{
+   if (this != &other) // Verifica se a atribuicao e a dele mesmo
+   {
+      // Faz uma 'deep copy' dos membros
+      firstName = other.firstName;
+      lastName = other.lastName;
+      nickname = other.nickname;
+	  phoneNumber = other.phoneNumber;
+      darkestSecret = other.darkestSecret;
+   }
+   return *this;
+}
+
 void Contact::setIndex(int i) {
     this->index = i;
 }
@@ -38,23 +54,7 @@ void Contact::CreateContact (int id, std::string first, std::string last, std::s
     this->darkestSecret = secret;
 }
 
-/* Copy Constructor.
-Copia do other para o this, assegurando alocacoes de memoria independentes */
-Contact& Contact::operator=(const Contact& other)
-{
-   if (this != &other) // Verifica se a atribuicao e a dele mesmo
-   {
-      // Faz uma 'deep copy' dos membros
-      firstName = other.firstName;
-      lastName = other.lastName;
-      nickname = other.nickname;
-	  phoneNumber = other.phoneNumber;
-      darkestSecret = other.darkestSecret;
-   }
-   return *this;
-}
-
-void Contact::DisplaySearched() {
+void Contact::DisplayContact() {
     std::cout << this->firstName << std::endl;
     std::cout << this->lastName << std::endl;
     std::cout << this->nickname << std::endl;

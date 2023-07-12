@@ -1,45 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: duarte33 <duarte33@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/12 18:15:09 by duarte33          #+#    #+#             */
+/*   Updated: 2023/07/12 18:15:10 by duarte33         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
-#include <cstdio>
 
-// Função para ler um input em C++
-std::string readInput() {
-    std::string input;
-    std::cout << ">";
-    std::getline(std::cin, input);
-    return input;
+/* Replica da funcao strcmp, 'const std::string& str1' e uma referencia para um 
+objeto e nao um pointer. Referencias permitem mandar os objetos sem criar copias
+deles e duplicar recursos. */
+int ft_strcmp(const std::string& str1, const std::string& str2) {
+    size_t len1 = str1.length();
+    size_t len2 = str2.length();
+    size_t minLen = std::min(len1, len2);
+
+    for (size_t i = 0; i < minLen; ++i) {
+        if (str1[i] < str2[i])
+            return -1;
+        else if (str1[i] > str2[i])
+            return 1;
+    }
+    if (len1 < len2)
+        return -1;
+    else if (len1 > len2)
+        return 1;
+    return 0;
 }
 
-/* Compara dois elementos ate um deles acabar */
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned int	i;
-
-	if (!s1 || !s2)
-		return (1);
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-int main(int ac, char **av)
+int main(void)
 {
 	PhoneBook myBook;
-	char *input;
+	std::string input;
 
-	(void)ac;
-	(void)av;
 	while (1)
 	{
-		input = const_cast<char*>(readInput().c_str());
+		input = readLine("Enter a command: ");
 		if ((ft_strcmp(input, "ADD") == 0))
 			myBook.AddContact();
 		else if (ft_strcmp(input, "SEARCH") == 0)
-		{
-			std::cout << lastContact() << std::endl;
-			std::cout << "SEARCH" << std::endl;
 			myBook.ShowContacts();
-		}
 		else if ((ft_strcmp(input, "EXIT") == 0))
 			break;
 	}
