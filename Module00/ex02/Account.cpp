@@ -90,17 +90,17 @@ bool Account::makeWithdrawal( int withdrawal )
 
 	_displayTimestamp();
 	inicial = this->_amount;
-	this->_amount -= withdrawal;
-	this->_nbWithdrawals += 1;
-	this->_totalNbWithdrawals += 1;
-	this->_totalAmount -= withdrawal;
 	std::cout << "index:" << this->_accountIndex \
 		<< ";p_amount:" << inicial;
-	if (this->_totalAmount >= withdrawal)
+	if (withdrawal <= this->_amount)
 	{
+		this->_amount -= withdrawal;
+		this->_totalAmount -= withdrawal;
+			this->_nbWithdrawals += 1;
+		this->_totalNbWithdrawals += 1;
 		std::cout << ";withdrawal:" << withdrawal \
 		<< ";amount:" << this->_amount \
-		<< ";nb_withdrawls:" << this->_nbWithdrawals \
+		<< ";nb_withdrawals:" << this->_nbWithdrawals \
 		<< "\n";
 		return (true);
 	}
