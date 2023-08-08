@@ -67,6 +67,6 @@ int main(int argc, char* argv[])
 
     output_file << content; //Permite o output_file ficar com o content depois de levar replace
     output_file.close();
-    std::cout << "File content replaced and saved to: " << output_file << std::endl;
+    std::cout << "File content replaced and saved to: " << filename + ".replace" << std::endl;
     return 0;
 }
