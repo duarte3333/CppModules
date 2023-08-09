@@ -2,21 +2,18 @@
 
 int Fixed::fractional = 8;
 
-Fixed::Fixed() : fixed(0)
-{
+Fixed::Fixed() : fixed(0){
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const raw)
-{
+Fixed::Fixed(int const raw){
     std::cout << "Int constructor called" << std::endl;
     this->setRawBits(raw << fractional);
 }
 
-Fixed::Fixed(float const raw)
-{
+Fixed::Fixed(float const raw){
     std::cout << "Float constructor called" << std::endl;
-    this->setRawBits(raw * (1 << fractional));
+    this->setRawBits(roundf(raw * (1 << fractional)));
 }
 
 Fixed::~Fixed() 
@@ -32,34 +29,39 @@ Fixed::Fixed(const Fixed &other)
 
 /* Copy Constructor.
 Copia do other para o this, assegurando alocacoes de memoria independentes */
-Fixed& Fixed::operator=(const Fixed& other)
+Fixed& Fixed::operator=(const Fixed &other)
 {
    std::cout << "Copy assignment operator called" << std::endl;
-   if (this != &other) // Verifica se a atribuicao e a dele mesmo
-   {
+   if (this != &other) {// Verifica se a atribuicao e a dele mesmo {
         fixed = other.getRawBits();
-        fractional = other.fractional;
    }
    return *this;
 }
 
-int Fixed::getRawBits() const
-{
-    std::cout << "getRawBits member function called" << std::endl;
-    return this->fixed;
+int Fixed::getRawBits() const{
+    return fixed;
 }
 
-void Fixed::setRawBits(const int raw)
-{
+void Fixed::setRawBits(const int raw){
     this->fixed = raw;
 }
 
+/* Esta funcao serve para passar de fixed point value
+para float */
 float Fixed::toFloat(void) const
+{
+    return ((float)this->getRawBits() / (1 << fractional));
+}
+
+/* O const serve para indicar que nao se altera
+o estado da classe */
+int Fixed::toInt(void) const
 {
     return (this->getRawBits() >> fractional);
 }
 
-int Fixed::toInt(void) const
-{
-    return (this->getRawBits() / (1 << fractional));
+//Isto e um polimorfismo de overload
+std::ostream& operator<<(std::ostream &os, const Fixed &fixed){
+    os << fixed.toFloat();
+    return (os);
 }
