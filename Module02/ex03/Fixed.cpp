@@ -126,6 +126,12 @@ int Fixed::toInt(void) const {
     return (this->getRawBits() >> fractional);
 }
 
+Fixed Fixed::abs() const {
+    if (*this < 0)
+        return *this * -1;
+    return *this;
+}
+
 //Isto e um polimorfismo de overload
 std::ostream& operator<<(std::ostream &os, const Fixed &fixed) {
     os << fixed.toFloat();

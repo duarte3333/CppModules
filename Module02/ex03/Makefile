@@ -2,7 +2,9 @@ NAME = fixed
 CXX = c++ -fsanitize=address -g
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp \
-	  Fixed.cpp 
+	  Fixed.cpp \
+	  bsp.cpp \
+	  Point.cpp
 OBJ =  $(SRC:.cpp=.o)
 
 $(NAME): ${OBJ}
