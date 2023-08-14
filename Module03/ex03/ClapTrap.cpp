@@ -6,12 +6,7 @@ ClapTrap::ClapTrap() : hitPoints(10), energyPoints(10), attackDamage(0){
 
 ClapTrap::ClapTrap(std::string nameInput) : name(nameInput), hitPoints(10),
 energyPoints(10), attackDamage(0) {
-    std::cout << "----------------------------" << std::endl;
     std::cout << "ClapTrap Constructor called" << std::endl;
-    std::cout << "Attack damage " << attackDamage << std::endl;
-    std::cout << "Starting hit points " << hitPoints << std::endl;
-    std::cout << "Starting energy points " << energyPoints << std::endl;
-    std::cout << "----------------------------" << std::endl;
 }
 
 ClapTrap::~ClapTrap(){

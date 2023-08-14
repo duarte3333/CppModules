@@ -1,11 +1,20 @@
 #include "ScavTrap.hpp"
 
-int main()
-{
-    ScavTrap a("curandeira");
+#include "ScavTrap.hpp"
 
-    a.attack("magico");
-    a.takeDamage(2);
-    a.beRepaired(4);
 
+int main(void) {
+	ScavTrap A("curandeira");
+	ScavTrap B(A);
+	ScavTrap C("mago");
+
+	B.guardGate();
+
+	C.attack(B.getName());
+	B.takeDamage(C.getDamageAttack());
+
+	B.attack(C.getName());
+	C.takeDamage(B.getDamageAttack());
+
+	C.beRepaired(2);
 }

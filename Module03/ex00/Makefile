@@ -1,5 +1,5 @@
 NAME = ClapTrap
-CXX = c++ -fsanitize=address -g
+CXX = c++  -g
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp \
 	  ClapTrap.cpp 

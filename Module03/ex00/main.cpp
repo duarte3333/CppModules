@@ -2,10 +2,16 @@
 
 int main()
 {
-    ClapTrap a("curandeira");
+	ClapTrap A = ClapTrap("Mago");
+	ClapTrap B = ClapTrap("Guerreiro");
 
-    a.attack("magico");
-    a.takeDamage(2);
-    a.beRepaired(4);
+	std::cout << A.getName() << std::endl;
+	std::cout << B.getName() << std::endl;
 
+	A.attack(B.getName());
+	B.takeDamage(A.getDamageAttack());
+	B.beRepaired(2);
+	
+	B.attack(A.getName());
+	A.beRepaired(2);
 }
