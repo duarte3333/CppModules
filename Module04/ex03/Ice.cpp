@@ -20,6 +20,12 @@ Ice& Ice::operator=(const Ice& other){
     return (*this);
 }
 
+Ice* Ice::clone() const{
+    return(new Ice());
+}
+
 void Ice::use(ICharacter& target){
+    std::cout << "* shoots and ice bolt at " << target.getName() \
+        << " *"<< std::endl;
 
 }

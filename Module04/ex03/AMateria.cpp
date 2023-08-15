@@ -1,6 +1,6 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria(){
+AMateria::AMateria() : equiped(0){
     std::cout << "AMateria constructor called" << std::endl;
 }
 
@@ -16,7 +16,6 @@ AMateria::AMateria(const AMateria &other){
     *this = other;
 }
 
-//Isto vai permitir fazer uma deep copy
 AMateria& AMateria::operator=(const AMateria& other){
     if (this != &other){
         materiaType = other.getType();
@@ -24,10 +23,12 @@ AMateria& AMateria::operator=(const AMateria& other){
     return (*this);
 }
 
-const std::string& AMateria::getType(){
-    return(materiaType)
+const std::string& AMateria::getType() const{
+    return(materiaType);
 }
 
 void AMateria::use(ICharacter& target){
 
+        std::cout << "* Abstract Materia *" << target.getName() \
+        << " *"<< std::endl;
 }

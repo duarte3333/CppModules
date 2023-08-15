@@ -2,10 +2,11 @@ NAME = Animal
 CXX = c++ -fsanitize=address -g
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp \
-	  AbsAnimal.cpp \
-	  Cat.cpp \
-	  Dog.cpp \
-	  Brain.cpp 
+	  AMateria.cpp \
+	  Character.cpp \
+	  Cure.cpp \
+	  Ice.cpp \
+	  MateriaSource.cpp
 OBJ =  $(SRC:.cpp=.o)
 
 $(NAME): ${OBJ}

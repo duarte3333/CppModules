@@ -3,7 +3,9 @@
 #include "AbsAnimal.hpp"
 #include "Brain.hpp"
 
-class Cat : virtual public AbsAnimal{
+class Cat : public AbsAnimal{
+    private:
+        Brain* brain;
     public:
         Cat();
         ~Cat();
@@ -11,6 +13,8 @@ class Cat : virtual public AbsAnimal{
         Cat& operator=(const Cat &other);
         
         void makeSound() const;
+        void setBrainIdea(std::string idea, int index);
+        void showBrainIdea(int index);
 };
 
 #endif

@@ -3,53 +3,67 @@
 
 int main()
 {
+    //const Animal* test = new Animal();
     const AbsAnimal* j = new Dog();
     const AbsAnimal* i = new Cat();
-    //const AbsAnimal* s = new AbsAnimal(); Para testar classe abstrata 
-
-    //const AbsAnimal* 
     delete j;//should not create a leak
     delete i;
 
     std::cout << "-----------------" << std::endl;
-    AbsAnimal* arrayAbsAnimals[10];
-    //AbsAnimal.makeSound();
+    AbsAnimal* arrayAnimals[10];
 
     for (int i = 0; i < 5; i++){
-        arrayAbsAnimals[i] = new Dog();
+        arrayAnimals[i] = new Dog();
         std::cout << "-" << std::endl;
 
     }
     for (int i = 5; i < 10; i++){
-        arrayAbsAnimals[i] = new Cat();
+        arrayAnimals[i] = new Cat();
         std::cout << "-" << std::endl;
     }
 
     for (int i = 9; i >= 0; i--){
-        arrayAbsAnimals[i]->makeSound();
-        delete arrayAbsAnimals[i];
+        arrayAnimals[i]->makeSound();
+        delete arrayAnimals[i];
     }
 
-    std::cout << "-----------------" << std::endl;
+    std::cout << "------IDEAS------" << std::endl;
+    
+    Dog* bonito = new Dog();
+    Dog* tmp2 = new Dog(*bonito);
 
-    Dog cao1;
-    //AbsAnimal cao2;
-    //cao2 = cao1;
+    bonito->showBrainIdea(5);
+    tmp2->showBrainIdea(5);
 
-    cao1.makeSound(); 
-    //cao2.makeSound();
+    bonito->setBrainIdea("bonito thinks he is pretty", 5);
+    bonito->showBrainIdea(5);
+    tmp2->setBrainIdea("tmp2 thinks he is earth is flat", 5);
+    tmp2->showBrainIdea(5);
+    
+    delete bonito;
+    delete tmp2;
 
-    std::cout << "-----------------" << std::endl;
+    std::cout << "------------" << std::endl;
 
-    //Check deep copy
-    const Dog* dog = new Dog();
-    //const AbsAnimal* dog2 = new Dog(*dog);
+    std::cout << "Dog Deep copy" << std::endl;
+    std::cout << std::endl;
 
-    //dog->makeSound();
-    //dog2->makeSound();
+    Dog basic;
+    {
+        Dog tmp = basic;
+    }
 
-    delete dog;
-    //delete dog2;
+    std::cout << "------------" << std::endl;
+
+    std::cout << "Testing Deep copy" << std::endl;
+    std::cout << std::endl;
+
+    Cat test2;
+    {
+        Cat temp2 = test2;
+    }
+
+    std::cout << "----------------" << std::endl;
 
     return 0;
 }

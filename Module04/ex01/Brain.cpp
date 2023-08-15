@@ -21,3 +21,11 @@ Brain& Brain::operator=(const Brain& other){
     }
     return (*this);
 }
+
+void    Brain::setIdea(std::string idea, int index){
+    ideas[index] = idea;
+}
+
+void	Brain::showIdea(int index){
+    std::cout <<  ideas[index] << std::endl;
+}

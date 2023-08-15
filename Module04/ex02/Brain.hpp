@@ -10,6 +10,8 @@ class Brain {
         ~Brain(); //Destructor
         Brain(const Brain &other); //Copy constructor
         Brain& operator=(const Brain &other); //Copy assign operator
+        void    setIdea(std::string idea, int index);
+		void	showIdea(int index);
 };
 
 #endif

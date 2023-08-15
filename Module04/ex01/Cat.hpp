@@ -3,7 +3,9 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class Cat : virtual public Animal{
+class Cat : public Animal{
+    private:
+        Brain* brain;
     public:
         Cat();
         ~Cat();
@@ -11,6 +13,8 @@ class Cat : virtual public Animal{
         Cat& operator=(const Cat &other);
         
         void makeSound() const;
+        void setBrainIdea(std::string idea, int index);
+        void showBrainIdea(int index);
 };
 
 #endif

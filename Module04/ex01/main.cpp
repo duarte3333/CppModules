@@ -3,6 +3,7 @@
 
 int main()
 {
+    const Animal* test = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
     delete j;//should not create a leak
@@ -26,17 +27,43 @@ int main()
         delete arrayAnimals[i];
     }
 
-    std::cout << "-----------------" << std::endl;
+    std::cout << "------IDEAS------" << std::endl;
+    
+    Dog* bonito = new Dog();
+    Dog* tmp2 = new Dog(*bonito);
 
-    //Check deep copy
-    const Dog* dog = new Dog();
-    const Animal* dog2 = new Dog(*dog);
+    bonito->showBrainIdea(5);
+    tmp2->showBrainIdea(5);
 
-    dog->makeSound();
-    dog2->makeSound();
+    bonito->setBrainIdea("bonito thinks he is pretty", 5);
+    bonito->showBrainIdea(5);
+    tmp2->setBrainIdea("tmp2 thinks he is earth is flat", 5);
+    tmp2->showBrainIdea(5);
+    
+    delete bonito;
+    delete tmp2;
 
-    delete dog;
-    delete dog2;
+    std::cout << "------------" << std::endl;
+
+    std::cout << "Dog Deep copy" << std::endl;
+    std::cout << std::endl;
+
+    Dog basic;
+    {
+        Dog tmp = basic;
+    }
+
+    std::cout << "------------" << std::endl;
+
+    std::cout << "Testing Deep copy" << std::endl;
+    std::cout << std::endl;
+
+    Cat test2;
+    {
+        Cat temp2 = test2;
+    }
+
+    std::cout << "----------------" << std::endl;
 
     return 0;
 }
