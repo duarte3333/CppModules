@@ -21,7 +21,7 @@ MateriaSource::MateriaSource(const MateriaSource &other){
 //Isto vai permitir fazer uma deep copy
 MateriaSource& MateriaSource::operator=(const MateriaSource& other){
     if (this != &other){
-        for(int i =0; i < 4; i++){
+        for(int i = 0; i < 4; i++){
             delete inventory[i];
             inventory[i] = other.inventory[i]->clone();
 
@@ -41,7 +41,7 @@ void MateriaSource::learnMateria(AMateria* newMateria){
 
 AMateria* MateriaSource::createMateria(std::string const & type){
     for (int i = 0; i < 4; i++){
-        if (inventory[i]->getType() == type){
+        if (inventory[i] && inventory[i]->getType() == type){
             return (inventory[i]->clone());
         }
     }
