@@ -14,9 +14,6 @@ Abstraction focuses on representing the essential features of an object while hi
 An ***abstract class*** is a class that **cannot be instantiated** and **serves as a blueprint for derived classes**. It can contain both concrete and abstract methods. 
 
 An ***interface***, on the other hand, is a **collection of abstract methods** that define a contract for classes to implement. Abstraction allows developers to model real-world concepts and build modular systems by defining common behaviors and characteristics without specifying implementation details.
-<p align="center">
-	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/4151b729-4c93-45f2-a75c-2315b7cdd324" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="400" height="400" />
-</p>
 
 ### Encapsulation
 
