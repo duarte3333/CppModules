@@ -1,7 +1,7 @@
 # CppModules - C+++++
-<center>
+<p align="center">
   <img src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="200" height="200" />
-</center>
+</p>
 
 # Cpp00
 
@@ -14,6 +14,9 @@ Abstraction focuses on representing the essential features of an object while hi
 An ***abstract class*** is a class that **cannot be instantiated** and **serves as a blueprint for derived classes**. It can contain both concrete and abstract methods. 
 
 An ***interface***, on the other hand, is a **collection of abstract methods** that define a contract for classes to implement. Abstraction allows developers to model real-world concepts and build modular systems by defining common behaviors and characteristics without specifying implementation details.
+<p align="center">
+	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/4151b729-4c93-45f2-a75c-2315b7cdd324" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="400" height="400" />
+</p>
 
 ### Encapsulation
 
@@ -28,6 +31,11 @@ Inheritance allows the **creation of new classes** (derived classes) **based on 
 ### Polymorphism
 
 Polymorphism is a fundamental concept in object-oriented programming that allows objects of different classes to be **treated in a unified manner**. It is based on the idea that an object can take on multiple forms or have multiple implementations, depending on the context in which it is used.
+
+
+<p align="center">
+	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/7c46846a-7621-485a-b02b-a63e05ddd110" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="500" height="250" />
+</p>
 
 **Method Overloading**: This type of polymorphism occurs when a class has multiple methods with the same name but different parameters. The selection of which method to call is determined at **compile-time** based on the types of arguments passed to the method.
 
@@ -748,8 +756,12 @@ ex: In the following example if there is the same method for both B and C, the c
 A::A() : public B(), public C(){
 }
 ```
-![Untitled](https://github.com/duarte3333/CppModules/assets/76222459/b242c617-be74-4216-b9b1-5bda23435f04)
-![Untitled (1)](https://github.com/duarte3333/CppModules/assets/76222459/9d1a7c3d-6c97-4ed6-b708-00de85215e3c)
+<p align="center">
+	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/b242c617-be74-4216-b9b1-5bda23435f04" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="300" height="300" />
+</p>
+<p align="center">
+	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/9d1a7c3d-6c97-4ed6-b708-00de85215e3c" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="500" height="500" />
+</p>
 
 # Cpp04
 
@@ -767,7 +779,9 @@ which means that the class cannot be instanciate, however if there are classes t
 
 A shallow copy should be nice if i only want to copy variables in the stack but if i want to copy pointers it will have the following problem:
 
-![Untitled (2)](https://github.com/duarte3333/CppModules/assets/76222459/b3089024-adbc-40a2-8fc6-3421b9e02bdf)
+<p align="center">
+	  <img src="https://github.com/duarte3333/CppModules/assets/76222459/b3089024-adbc-40a2-8fc6-3421b9e02bdf" data-canonical-src="https://github.com/duarte3333/CppModules/assets/76222459/5c6635f0-99b0-4c58-a0b6-63cc38a27e41.png" width="500" height="500" />
+</p>
 
 ### Deep copy
 
