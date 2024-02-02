@@ -32,7 +32,7 @@ PhoneBook &PhoneBook::operator=(const PhoneBook &other)
 {
     std::string result = str;
     result.erase(std::remove_if(result.begin(), result.end(), \
-		[](unsigned char c) { return std::isspace(c); }), result.end());
+		[](unis_signed char c) { return std::isspace(c); }), result.end());
     return result;
 } */ 
 

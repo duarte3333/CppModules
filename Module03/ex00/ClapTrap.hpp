@@ -17,8 +17,8 @@ class ClapTrap {
         //Nao entendo bem a posicao do &
         ClapTrap& operator=(const ClapTrap &other); //Copy assignment operator
         void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+        void takeDamage(unis_signed int amount);
+        void beRepaired(unis_signed int amount);
         int	 getDamageAttack(void) const;
         std::string getName();
 };

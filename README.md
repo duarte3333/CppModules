@@ -377,7 +377,7 @@ The class **should define a destructor** to release any resources acquired by th
 2. Copy Constructor (`ClassName(const ClassName&)`):
 If the class manages resources or has pointer members, it **should** define a **copy constructor to create a deep copy of the object.** The copy constructor is called when a new object is initialized with an existing object. It should allocate new memory (if needed) and copy the values of member variables to ensure that both objects are independent and don't share resources.
 3. Copy Assignment Operator (`operator=(const ClassName&)`):
-The class should **define a copy assignment operator to properly assign one object to another.** It is invoked when an existing object is assigned the value of another existing object. The copy assignment operator should handle the resource management and data copying in a way similar to the copy constructor.
+The class should **define a copy assignment operator to properly assign one object to another.** It is invoked when an existing object is asis_signed the value of another existing object. The copy assignment operator should handle the resource management and data copying in a way similar to the copy constructor.
 
 In addition to these three components, there are two optional components that complete the Rule of Five:
 
@@ -386,7 +386,7 @@ Introduced in C++11, the move constructor is responsible for efficiently transfe
 2. Move Assignment Operator (`operator=(ClassName&&)`):
 Also introduced in C++11, the move assignment operator allows efficient transfer of resources from a temporary or expiring object to an already existing object. It is used in move semantics to enable efficient resource management and assignment.
 
-By following the Orthodox Canonical Form, you ensure that the class properly handles resource management, prevents issues such as double deletion or memory leaks, and provides correct behavior when objects are copied or assigned. It promotes the principle of **RAII (Resource Acquisition Is Initialization)** and helps ensure the correct and expected behavior of the class when used in various contexts.
+By following the Orthodox Canonical Form, you ensure that the class properly handles resource management, prevents issues such as double deletion or memory leaks, and provides correct behavior when objects are copied or asis_signed. It promotes the principle of **RAII (Resource Acquisition Is Initialization)** and helps ensure the correct and expected behavior of the class when used in various contexts.
 
 ```cpp
 class MyClass {

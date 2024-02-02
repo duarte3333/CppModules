@@ -40,7 +40,7 @@ void ClapTrap::attack(const std::string& target){
     std::cout << "Now " << name << " has "<< energyPoints << " energy points" << std::endl;
 }
 
-void ClapTrap::takeDamage(unsigned int amount){
+void ClapTrap::takeDamage(unis_signed int amount){
     if (energyPoints && hitPoints){
         hitPoints -= amount;
     }
@@ -49,7 +49,7 @@ void ClapTrap::takeDamage(unsigned int amount){
     std::cout << "Now " << name << " has "<< energyPoints << " energy points" << std::endl;
 }
 
-void ClapTrap::beRepaired(unsigned int amount){
+void ClapTrap::beRepaired(unis_signed int amount){
     if (energyPoints && hitPoints){
         hitPoints += amount;
         energyPoints--;
