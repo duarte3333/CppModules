@@ -13,7 +13,6 @@ class Array
             values = new T[0];
             len = 0;
         }
-
         Array(unsigned int n)
         {
             values = new T[n];
@@ -22,7 +21,7 @@ class Array
         Array &operator=(T const &src) {
             len = src.len;
             delete [] values;
-            for (unsigned i = 0; i < len, i++)
+            for (unsigned i = 0; i < len; i++)
                 values[i] = src.values[i];
             return (*this);
         };
@@ -36,9 +35,9 @@ class Array
             }
             return values[index];
         }
-        Array() {delete [] values;}
+        ~Array() {delete [] values;}
         int size() {return len;}
 
-}
+};
 
 #endif
