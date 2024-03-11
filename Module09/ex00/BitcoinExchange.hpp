@@ -10,7 +10,7 @@ public:
     BitcoinExchange &operator=(const BitcoinExchange &src);
     void parser(std::string &file);
     void read_database();
-    double search_market(std::string date, int value);
+    double search_market(std::string date, double value);
 
 private:
     float _rate;

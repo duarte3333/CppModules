@@ -60,7 +60,7 @@ int year_checker(const std::string& s){
     return 1;
 }
 
-int value_checker(const std::string& s){
+double value_checker(const std::string& s){
     if (s.empty()) {
         std::cout << "Value not valid: string is empty" << std::endl;
         return 0;
@@ -71,7 +71,7 @@ int value_checker(const std::string& s){
     for (size_t i = 0; i < s.size(); ++i) {
         if (s[i] == '.')
             counter++;
-        else if (s[i] == ' ')
+        if (s[i] == ' ')
             continue;
         else if (!std::isdigit(static_cast<unsigned char>(s[i])) && s[i] != '.' && s[i] != '+' && s[i] != '-') {
             std::cout << "Value not valid: contains non-digit characters" << std::endl;
@@ -85,7 +85,7 @@ int value_checker(const std::string& s){
             str_only_digits.push_back(s[i]);
         }
     }
-    int s_int = std::atoi(str_only_digits.c_str());
+    double s_int = std::atof(str_only_digits.c_str());
     if (!(s_int >= 0 && s_int <= 1000))
     {
         std::cout << "Value not valid: out of range" << std::endl;
@@ -94,7 +94,7 @@ int value_checker(const std::string& s){
     return s_int;
 }
 
-double BitcoinExchange::search_market(std::string date, int value){
+double BitcoinExchange::search_market(std::string date, double value){
     
     std::string new_date;
     for (size_t i = 0; i < date.size(); ++i){
@@ -111,8 +111,9 @@ double BitcoinExchange::search_market(std::string date, int value){
     // if (it == this->market_values.end()){
     //     std::cout << "Anotha" << std::endl;
     // }
-    std::cout << "closer: "<< it->first << "," << it->second << std::endl;
-    return static_cast<double>(value)*it->second;
+    //std::cout << "value: " << value << std::endl;
+    //std::cout << "closer: "<< it->first << "," << it->second << std::endl;
+    return (value)*(it->second);
 }
 
 void BitcoinExchange::parser(std::string &filename) {
@@ -123,7 +124,7 @@ void BitcoinExchange::parser(std::string &filename) {
     }
     std::string line;
     char delimiter = '|';
-    int value_cleaner;
+    double value_cleaner;
     double market;
     while (std::getline(file, line)) {
         if (this->market_values.empty()){
@@ -142,7 +143,7 @@ void BitcoinExchange::parser(std::string &filename) {
                         continue;
                     }
                     market = search_market(tokens[0], value_cleaner);
-                    std::cout << tokens[0] << "=>" << tokens[1] << " == " << market << std::endl << std::endl;
+                    std::cout << tokens[0] << "=>" << tokens[1] << " == " << market << std::endl;
                 }
                 else {
                     std::cerr << "Unexpected format" << std::endl;
