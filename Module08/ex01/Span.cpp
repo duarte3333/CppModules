@@ -7,7 +7,7 @@ Span &Span::operator=(const Span &src) {
 	sorted = src.sorted;
     return *this;
 }
-
+oid Span::addNumber(int n) {
 void Span::addNumber(int n) {
     if (values.size() == _span)
         throw SpanFullException();
