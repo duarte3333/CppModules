@@ -2,7 +2,7 @@ NAME = RPN
 CXX = c++ #-fsanitize=address -g
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp \
-	  RPN.cpp 
+	  RPN.cpp
 
 
 OBJ =  $(SRC:.cpp=.o)
