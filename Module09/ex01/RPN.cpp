@@ -6,6 +6,25 @@
 RPN::RPN() {}
 RPN::~RPN() {}
 
+int decide_flag(std::vector<std::string> tokens, int start) { //flag == 0, it's triple; flag == 1, it's double
+    int counter = 0;
+    for (size_t i = start; i < tokens.size(); i++) {
+        if (tokens[i] == "+" || tokens[i] == "-" || tokens[i] == "*" || tokens[i] == "/") {
+            std::cout << "counter: " << counter << std::endl;
+            return counter;
+        }
+        counter++;
+    }
+    return counter;
+}
+
+void print_stack(std::vector<int> stack) {
+    for (size_t i = 0; i < stack.size(); i++) {
+        std::cout << stack[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 int RPN::evaluate(const std::string& input) {
     std::istringstream iss(input);
     std::vector<std::string> tokens;
@@ -15,39 +34,38 @@ int RPN::evaluate(const std::string& input) {
         tokens.push_back(token);
     }
 
-    if (tokens.size() < 3) {
-        std::cerr << "Not enough input for an operation." << std::endl;
-        return INT_MIN;
-    }
-
+    std::vector<int> stack;
     int op_result = 0;
-    int flag = 0;
-    std::istringstream converter;
+    int n1, n2;
 
-    for (size_t i = 0; i < tokens.size();) {
-        int n1, n2;
-        char opp;
+    for (size_t i = 0; i < tokens.size(); i++) {
+        const std::string& token = tokens[i];
+        if (token == "+" || token == "-" || token == "*" || token == "/") {
+            if (stack.size() < 2) {
+                std::cerr << "Error: insufficient operands for operation " << token << std::endl;
+                return INT_MIN;
+            }
+            n2 = stack.back(); stack.pop_back(); // get and pop last element of the stack
+            n1 = stack.back(); stack.pop_back();
+            op_result = operation(n1, n2, token[0]);
+            if (op_result == INT_MIN) {
+                return INT_MIN;
+            }
+            stack.push_back(op_result);
+            //print_stack(stack);
 
-        if (!flag) {
-            if (!safe_stoi(tokens[i], n1) || !safe_stoi(tokens[i + 1], n2)) return INT_MIN;
-            opp = tokens[i + 2][0];
-            flag = 1;
-        } else {
-            n1 = op_result;
-            if (!safe_stoi(tokens[i], n2)) return INT_MIN;
-            opp = tokens[i + 1][0];
-            flag = 2;
+        } 
+        else {
+            int number;
+            if (!safe_stoi(token, number)) {
+                std::cerr << "Error: invalid number " << token << std::endl;
+                return INT_MIN;
+            }
+            stack.push_back(number);
+            //print_stack(stack);
+
         }
-
-        op_result = operation(n1, n2, opp);
-        if (op_result == INT_MIN) {
-            return INT_MIN;
-        }
-
-        if (flag == 1) i += 3;
-        if (flag == 2) i += 2;
     }
-
     return op_result;
 }
 
