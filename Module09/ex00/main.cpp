@@ -15,7 +15,7 @@ int main(int ac, char **av) {
         exchange.parser(filename);
     }
     else {
-        std::cout << "Usage: ./a.out filename" << std::endl;
+        std::cout << "Usage: ./btc filename" << std::endl;
     }
     return 0;
 }

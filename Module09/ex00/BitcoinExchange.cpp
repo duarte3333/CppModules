@@ -13,6 +13,7 @@
 #include <map>
 #include <iomanip>
 #include <iterator>
+#include <climits>
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -94,27 +95,31 @@ double value_checker(const std::string& s){
     return s_int;
 }
 
-double BitcoinExchange::search_market(std::string date, double value){
-    
+double BitcoinExchange::search_market(const std::string date, double value) {
     std::string new_date;
-    for (size_t i = 0; i < date.size(); ++i){
-        if (date[i] == ' ')
-            continue;
-        else {
-            new_date.push_back(date[i]);
+    for (std::string::const_iterator it = date.begin(); it != date.end(); ++it) {
+        if (*it != ' ')
+            new_date.push_back(*it);
+    }
+    // Search for the closest lower or equal date in the market values
+    std::map<std::string, double>::iterator it = this->market_values.lower_bound(new_date);
+
+    // Handle the case when the date is beyond any existing date in the database
+    if (it == this->market_values.end()) {
+        if (!this->market_values.empty()) {
+            --it; 
+            return value * it->second;
+        } else {
+            return INT_MIN; // Database has no entries
         }
     }
-    std::map<std::string, double>::iterator it = this->market_values.lower_bound(new_date);
-    // if (it == this->market_values.begin()){
-    //     std::cout << "No lower date found" << std::endl;
-    // }
-    // if (it == this->market_values.end()){
-    //     std::cout << "Anotha" << std::endl;
-    // }
-    //std::cout << "value: " << value << std::endl;
-    //std::cout << "closer: "<< it->first << "," << it->second << std::endl;
-    return (value)*(it->second);
+    if (it->first != new_date && it != this->market_values.begin()) {
+        --it;
+    }
+    return value * it->second;
 }
+
+
 
 void BitcoinExchange::parser(std::string &filename) {
     std::ifstream file(filename.c_str());
@@ -143,7 +148,8 @@ void BitcoinExchange::parser(std::string &filename) {
                         continue;
                     }
                     market = search_market(tokens[0], value_cleaner);
-                    std::cout << tokens[0] << "=>" << tokens[1] << " == " << market << std::endl;
+                    if (market != INT_MIN)
+                        std::cout << tokens[0] << "=>" << tokens[1] << " == " << market << std::endl;
                 }
                 else {
                     std::cerr << "Unexpected format" << std::endl;
