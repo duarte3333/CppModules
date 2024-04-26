@@ -61,7 +61,6 @@ int main(int ac, char **av) {
 
     std::cout << "After: ";
     print_array(array);
-    std::cout << std::setw(40) << "Time taken to sort with vector: " << std::fixed << std::setprecision(10) << static_cast<double>(end_vector - start_vector) * 1000.0 / CLOCKS_PER_SEC << " milliseconds" << std::endl;
 
     std::cout << "Before: ";
     print_list(list_array);
@@ -72,7 +71,8 @@ int main(int ac, char **av) {
 
     std::cout << "After: ";
     print_list(list_array);
-    std::cout << std::setw(40) << "Time taken to sort with list: " << std::fixed << std::setprecision(10) << static_cast<double>(end_list - start_list) * 1000.0 / CLOCKS_PER_SEC << " milliseconds" << std::endl;
+    std::cout << "Time taken to sort with vector: " << std::fixed << std::setprecision(10) << static_cast<double>(end_vector - start_vector) * 1000.0 / CLOCKS_PER_SEC << " milliseconds" << std::endl;
+    std::cout << "Time taken to sort with list: " << std::fixed << std::setprecision(10) << static_cast<double>(end_list - start_list) * 1000.0 / CLOCKS_PER_SEC << " milliseconds" << std::endl;
 
     return 0;
 }

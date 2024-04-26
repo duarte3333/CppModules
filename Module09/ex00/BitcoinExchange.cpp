@@ -41,24 +41,22 @@ std::vector<std::string> split(const std::string& s, char delimiter) {
     return tokens;
 }
 
-int year_checker(const std::string& s){
-    int i = 0;
-    unsigned char current_char;
-    while (i < static_cast<int>(s.size()) - 1)
-    {
-        current_char = static_cast<unsigned char>(s[i]);
-        if ((i <= 3 && !std::isdigit(current_char)) \
-            || ((i == 4 || i == 7) && s[i] != '-') \
-            || ((i >= 5 && i <= 6) && !std::isdigit(current_char)) \
-            || ((i >= 8 && i <= 9) && !std::isdigit(current_char)) \
-            || (i == 10 && current_char == ' '))
-        {
-            std::cout << "Date not valid" << std::endl;
-            return 0;
-        }
-        i++;
+int year_checker(const std::string& date){
+    if (date[4] != '-' || date[7] != '-') return false;
+
+    for (int i = 0; i < 10; ++i) {
+        if (i == 4 || i == 7) continue;
+        if (!isdigit(date[i])) return false;
     }
-    return 1;
+
+    int year = atoi(date.substr(0, 4).c_str());
+    int month = atoi(date.substr(5, 2).c_str());
+    int day = atoi(date.substr(8, 2).c_str());
+
+    if (year < 1000 || year > 9999) return false;
+    if (month < 1 || month > 12) return false;
+    if (day < 1 || day > 31) return false; 
+    return true;
 }
 
 double value_checker(const std::string& s){
@@ -142,6 +140,7 @@ void BitcoinExchange::parser(std::string &filename) {
                 if (tokens.size() == 2) {
                     value_cleaner = value_checker(tokens[1]);
                     if (!year_checker(tokens[0])){
+                        std::cout << "Error: Invalid date" << std::endl;
                         continue;
                     }
                     else if (!value_cleaner){
@@ -183,6 +182,43 @@ void BitcoinExchange::read_database(){
             //std::cout << std::fixed << std::setprecision(10) << market_values[tokens[0]] << std::endl;
         }
     }
+}
+
+bool is_valid_number(const std::string& number) {
+    for (size_t i = 0; i < number.length(); ++i) {
+        if (!isdigit(number[i]) && number[i] != '.') return false;
+    }
+    return true;
+}
+
+int BitcoinExchange::mini_parser_database(){
+    std::ifstream file("data.csv");
+    if (!file.is_open()) {
+        std::cerr << "Error opening file" << std::endl;
+        return 0;
+    }
+    std::string line;
+    while (std::getline(file, line)){
+        if (line != "date,exchange_rate"){
+            size_t commaPos = line.find(',');
+            if (commaPos == std::string::npos) return false;
+
+            std::string datePart = line.substr(0, commaPos);
+            std::string numberPart = line.substr(commaPos + 1);
+            if (datePart.empty() || numberPart.empty()) return false;
+            if (datePart.length() != 10) return false;
+            if (!year_checker(datePart))
+            {
+                return 0;
+            }
+            
+            if(!is_valid_number(numberPart)) {
+                return 0;
+            }
+        }
+    }
+    file.close();
+    return 1;
 }
 
 

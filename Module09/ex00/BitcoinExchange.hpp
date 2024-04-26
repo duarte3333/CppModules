@@ -11,6 +11,7 @@ public:
     void parser(std::string &file);
     void read_database();
     double search_market(std::string date, double value);
+    int mini_parser_database();
 
 private:
     float _rate;

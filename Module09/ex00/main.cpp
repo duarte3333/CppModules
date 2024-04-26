@@ -11,6 +11,10 @@ int main(int ac, char **av) {
     if (ac == 2) {
         std::string filename = av[1];
         BitcoinExchange exchange;
+        if (exchange.mini_parser_database() == 0) {
+            std::cout << "Database parsing error" << std::endl;
+            return 0;
+        }
         exchange.read_database();
         exchange.parser(filename);
     }
