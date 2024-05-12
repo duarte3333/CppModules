@@ -826,7 +826,335 @@ public:
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
     int arrSize = sizeof(arr) / sizeof(arr[0]);
-
     DeepCopyExample original(arr, arrSize);
     DeepCopyExample
 ```
+
+## Cpp05
+
+- **Exceptions**:
+    - Exceptions are a mechanism in C++ for handling errors and exceptional conditions that may arise during program execution.
+    - They allow for the separation of error-handling code from normal program logic, improving code readability and maintainability.
+    - Key concepts in exception handling include try, catch, and throw.
+    - Try blocks are used to enclose code that might throw exceptions, while catch blocks are used to handle those exceptions.
+    - Exceptions can be thrown explicitly by using the throw keyword or implicitly by standard library functions or by the C++ runtime system.
+    - Proper exception handling involves identifying potential error conditions, throwing appropriate exceptions, and catching and handling them gracefully.
+    
+    ```cpp
+    #include <iostream>
+    #include <stdexcept>
+    
+    class Calculator {
+    public:
+        // Constructor
+        Calculator() {}
+    
+        // Function to perform division
+        double divide(double x, double y) {
+            if (y == 0) {
+                throw std::invalid_argument("Division by zero");
+            }
+            return x / y;
+        }
+    };
+    
+    int main() {
+        Calculator calc;
+        double result;
+    
+        try {
+            // Attempt division
+            result = calc.divide(10, 2);
+            std::cout << "Result: " << result << std::endl;
+    
+            // Attempt division by zero
+            result = calc.divide(10, 0); // This will throw an exception
+            std::cout << "Result: " << result << std::endl; // This line will not execute
+        } catch (const std::invalid_argument& e) {
+            // Catch and handle the exception
+            std::cerr << "Exception caught: " << e.what() << std::endl;
+        }
+    
+        return 0;
+    }
+    ```
+    
+    ## Cpp06
+    
+    ### 1. C++ Casts:
+    
+    C++ casts are mechanisms used to convert one data type into another. They provide a way to explicitly instruct the compiler to perform type conversions. The module likely covers different types of casts, including:
+    
+    - **Static Cast**: Used for conversions that are well-defined and do not involve pointers to unrelated classes.
+        
+        ```cpp
+        double d = 3.14;
+        int i = static_cast<int>(d); // Converts double to int`
+        ```
+        
+    - **Dynamic Cast**: Used for conversions between polymorphic types (types with virtual functions) and performs runtime type checking.
+        
+        ```cpp
+        class Base { 
+        	virtual void foo() {}
+        };
+        
+        class Derived : public Base {};
+        	Base* basePtr = new Derived();
+        	Derived* derivedPtr = dynamic_cast<Derived*>(basePtr); // Performs runtime type checking
+        
+        ```
+        
+    - **Const Cast**: Used to add or remove const or volatile qualifiers from a variable.
+        
+        ```cpp
+        const int x = 10;
+        int& y = const_cast<int&>(x); // Removes const qualifier
+        ```
+        
+    - **Reinterpret Cast**: Used for type punning, converting one pointer type to another pointer type, or converting any pointer type to a related integral type.
+        
+        ```cpp
+        int num = 10;
+        double* ptr = reinterpret_cast<double*>(&num); // Converts pointer type
+        ```
+        
+    
+    ### 2. Serialization:
+    
+    Serialization is the process of converting objects into a format that can be stored or transmitted and reconstructed later. It's commonly used for saving the state of objects to files, databases, or sending over networks. The exercise likely covers:
+    
+    - **Serialization Mechanisms**: Understanding how to convert objects into a stream of bytes, often involving converting data members into a standardized format.
+        
+        ```cpp
+        class MyClass { 
+        	int data; // Serialization method 
+        	void serialize(std::ofstream& file) { 
+        		file.write(reinterpret_cast<char*>(&data), sizeof(int)); 
+        	}
+        };
+        
+        ```
+        
+    - **Pointer Serialization**: Handling serialization of pointers by converting them to a format that can later be deserialized into valid pointers.
+        
+        ```cpp
+        class Serializable {
+        	public: virtual void serialize(std::ofstream& file) = 0;
+        };
+        class Data : public Serializable {
+        	public: void serialize(std::ofstream& file) override { file.write(reinterpret_cast<char*>(this), sizeof(*this)); }
+        };
+        
+        ```
+        
+    
+    ### 3. Type Identification:
+    
+    Type identification involves determining the actual type of an object at runtime, especially in polymorphic scenarios where the exact type may not be known at compile time. The exercise may focus on:
+    
+    - **Runtime Type Identification (RTTI)**: Understanding how to determine the type of an object dynamically during program execution.
+        
+        ```cpp
+        class Base {
+        	public: virtual ~Base() {}
+        };
+        class Derived : public Base {};
+        	Base* basePtr = new Derived();
+        	if (Derived* derivedPtr = dynamic_cast<Derived*>(basePtr)) 
+        	{ // Type identification successful
+        }
+        
+        ```
+        
+    - **Virtual Functions**: Leveraging polymorphism and virtual functions to enable runtime type identification.
+        
+        ```cpp
+        class Base {
+        public:
+            virtual void identify() {
+                std::cout << "Base" << std::endl;
+            }
+        };
+        
+        class Derived : public Base {
+        public:
+            void identify() override {
+                std::cout << "Derived" << std::endl;
+            }
+        };
+        
+        Base* obj = new Derived();
+        obj->identify(); // Calls Derived::identify() at runtime
+        
+        ```
+        
+    - **Typecasting**: Using casts to convert pointers to base classes into pointers to derived classes for type identification.
+    
+    ## Cpp07
+    
+    Templates in C++ provide a way to create generic classes and functions that can work with any data type. Here's an example of a simple template function and a template class:
+    
+    ```cpp
+    #include <iostream>
+    
+    // Example of a template function
+    template <typename T>
+    T add(T a, T b) {
+        return a + b;
+    }
+    
+    // Example of a template class
+    template <typename T>
+    class Pair {
+    private:
+        T first;
+        T second;
+    public:
+        Pair(T f, T s) : first(f), second(s) {}
+        T getFirst() const { return first; }
+        T getSecond() const { return second; }
+    };
+    
+    int main() {
+        // Using the template function with int
+        std::cout << "Sum of integers: " << add(5, 3) << std::endl;
+    
+        // Using the template class with double
+        Pair<double> doublePair(3.14, 6.28);
+        std::cout << "First element of doublePair: " << doublePair.getFirst() << std::endl;
+        std::cout << "Second element of doublePair: " << doublePair.getSecond() << std::endl;
+    
+        return 0;
+    }
+    
+    ```
+    
+    In this example:
+    
+    - The `add` function is a template function that can work with any data type `T`. It adds two values of type `T` and returns the result.
+    - The `Pair` class is a template class that can hold a pair of elements of the same data type `T`. It has member functions to retrieve the first and second elements of the pair.
+    - In `main()`, the `add` function is used with `int` arguments, and the `Pair` class is instantiated with `double` data type.
+    
+    ## Cpp08
+    
+    Iterators are a fundamental concept in C++ that provide a way to access elements in a container (like arrays, linked lists, trees, etc.) sequentially without exposing the underlying representation of the container. They act as pointers in many respects but are more generalized; while pointers are a form of iterator, not all iterators are pointers. Iterators abstract the process of iterating over a collection of objects, allowing C++ algorithms to be applied to a wide variety of containers using a uniform interface.
+    
+    ### Types of Iterators
+    
+    Iterators in C++ can be categorized into several types, each supporting different operations:
+    
+    1. **Input Iterators:** Can read from a sequence of elements in a forward direction. They support operations like `operator++` for moving to the next element and `operator*` for accessing the element.
+    2. **Output Iterators:** Can write to a sequence of elements in a forward direction. Like input iterators, they support `operator++` but are used for output operations.
+    3. **Forward Iterators:** Combine the capabilities of input and output iterators but can only move forward through a sequence.
+    4. **Bidirectional Iterators:** Extend forward iterators by adding the ability to iterate backwards through a sequence with `operator--`.
+    5. **Random Access Iterators:** Offer the most functionality, supporting all the operations of bidirectional iterators plus the ability to access elements non-sequentially, meaning they can jump forward or backward to any element in constant time.
+    
+    ### Iterator Operations
+    
+    Iterators support various operations, including:
+    
+    - **Incrementing (`++iterator` or `iterator++`):** Moves the iterator to the next element in the container.
+    - **Decrementing (`-iterator` or `iterator--`):** Moves the iterator to the previous element in the container. (Only for bidirectional and random access iterators)
+    - **Dereferencing (`iterator`):** Accesses the value of the element pointed to by the iterator.
+    - **Arrow Operator (`iterator->`):** Accesses a member of the element pointed to by the iterator.
+    - **Difference (`iterator1 - iterator2`):** Computes the distance between two iterators. (Only for random access iterators)
+    - **Random Access (`iterator[n]`):** Accesses the nth element relative to the iterator. (Only for random access iterators)
+    
+    ### Example Usage
+    
+    Here's a simple example using iterators with a `std::vector`, which is a standard template library container:
+    
+    ```cpp
+    #include <iostream>#include <vector>int main() {
+        std::vector<int> vec = {1, 2, 3, 4, 5};
+    
+        // Using an iterator to access elements
+        for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
+            std::cout << *it << " ";
+        }
+    
+        // C++11 and later allows for a simpler syntax using auto keyword
+        for (auto it = vec.begin(); it != vec.end(); ++it) {
+            std::cout << *it << " ";
+        }
+    
+        // Even simpler with range-based for loop in C++11
+        for (int val : vec) {
+            std::cout << val << " ";
+        }
+    }
+    
+    ```
+    
+    ### Iterators in C++ Standard Library
+    
+    The C++ Standard Library provides iterator support for its container classes, such as `std::vector`, `std::list`, `std::map`, etc. Iterators are integral to the use of algorithm functions (e.g., `std::sort`, `std::find`) that operate on containers.
+    
+    Understanding and effectively using iterators are key to writing efficient and adaptable C++ code, especially when dealing with collections of objects.
+    
+    ### Vectors
+    
+    In C++, `std::vector` is a dynamic array that can grow and 
+    shrink in size at runtime. It is a template class that is part of the 
+    C++ Standard Template Library (STL). Vectors are sequence containers 
+    that encapsulate dynamic size arrays, offering the flexibility of 
+    resizing and the ability to store elements of a specific type (`T`) in a contiguous block of memory.
+    
+    ### Stack container
+    
+    In C++, `std::stack` is a container adaptor that gives the programmer the functionality of a stack - specifically, a LIFO (last in, first out) data structure. The `std::stack` class template is defined in the `<stack>` header file.
+    
+    A stack supports only a limited set of operations:
+    
+    - **push:** Add an element to the top of the stack.
+    - **pop:** Remove the top element from the stack.
+    - **top:** Access the top element of the stack.
+    - **empty:** Check if the stack is empty.
+    - **size:** Return the number of elements in the stack.
+    
+    Underneath, `std::stack` uses a container (by default `std::deque`, but it can also use `std::list` or `std::vector`) to hold the elements. The choice of the underlying container type can be specified as a template parameter.
+    
+    ### Example Usage of `std::stack`
+    
+    Here's a simple example demonstrating how to use `std::stack`:
+    
+    ```cpp
+    #include <iostream>#include <stack>int main() {
+        std::stack<int> myStack; // Declare a stack of integers
+    
+        // Push elements onto the stack
+        myStack.push(10);
+        myStack.push(20);
+        myStack.push(30);
+    
+        std::cout << "The stack size is: " << myStack.size() << std::endl;
+    
+        // Accessing the top element
+        std::cout << "The top element is: " << myStack.top() << std::endl;
+    
+        // Popping elements from the stack
+        while (!myStack.empty()) {
+            std::cout << "Popping: " << myStack.top() << std::endl;
+            myStack.pop(); // Remove the top element
+        }
+    
+        return 0;
+    }
+    ```
+    
+    ### Types of iterators
+    
+    - **Use `iterator`** when you need to iterate over a container and might modify the elements.
+    - **Use `const_iterator`** when you want to iterate over a container without modifying the elements, such as when the container is passed to a function that should not alter its contents.
+    - **Use `reverse_iterator`** when you need to iterate over a container in reverse order and might modify the elements.
+    - **Use `const_reverse_iterator`** when you need to iterate over a container in reverse order but should not modify the elements.
+    
+    # Cpp09
+    
+    ### Merge-insertion sort
+
+    1. **Merge Sort**: A widely used sorting algorithm that follows the divide and conquer strategy. It splits the array into halves, sorts each half, and then merges them back together in sorted order.
+
+    2. **Insertion Sort**: It works by building the final sorted array one item at a time, inserting each new element into its proper position within a sorted subset.
+  
